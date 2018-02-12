@@ -23,17 +23,17 @@ public class fallingNotes extends Application{
 
 	private Random r = new Random();
 	double rand = Math.random() + 1;
-	
-	private Circle circle1 = new Circle(100, -50, 20);
-	private Circle circle2 = new Circle(200, -50, 20);
-	private Circle circle3 = new Circle(300, -50, 20);
-	private Circle circle4 = new Circle(400, -50, 20);
-	private Circle circle5 = new Circle(500, -50, 20);
-	private Circle clickCircle1 = new Circle(100, 590, 20);
-	private Circle clickCircle2 = new Circle(200, 590, 20);
-	private Circle clickCircle3 = new Circle(300, 590, 20);
-	private Circle clickCircle4 = new Circle(400, 590, 20);
-	private Circle clickCircle5 = new Circle(500, 590, 20);
+	private double RADIUS = 20.0;
+	private Circle circle1 = new Circle(100, -50, RADIUS);
+	private Circle circle2 = new Circle(200, -50, RADIUS);
+	private Circle circle3 = new Circle(300, -50, RADIUS);
+	private Circle circle4 = new Circle(400, -50, RADIUS);
+	private Circle circle5 = new Circle(500, -50, RADIUS);
+	private Circle clickCircle1 = new Circle(100, 590, RADIUS);
+	private Circle clickCircle2 = new Circle(200, 590, RADIUS);
+	private Circle clickCircle3 = new Circle(300, 590, RADIUS);
+	private Circle clickCircle4 = new Circle(400, 590, RADIUS);
+	private Circle clickCircle5 = new Circle(500, 590, RADIUS);
 	
 	int score = 0;
 	Text scenetitle = new Text("Score");
@@ -44,11 +44,11 @@ public class fallingNotes extends Application{
 		
 	    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 	    
-		circle1.setRadius(20.0);
-		circle2.setRadius(20.0);
-		circle3.setRadius(20.0);
-		circle4.setRadius(20.0);
-		circle5.setRadius(20.0);
+		circle1.setRadius(RADIUS);
+		circle2.setRadius(RADIUS);
+		circle3.setRadius(RADIUS);
+		circle4.setRadius(RADIUS);
+		circle5.setRadius(RADIUS);
 		
 		Timeline timeline = new Timeline();
 		timeline.setCycleCount(10);
