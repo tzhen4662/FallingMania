@@ -18,12 +18,18 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+/**
+ * 
+ * @author Jacky Lin & Tim Zhen
+ *
+ */
 public class fallingNotes extends Application{
 
 	private Random r = new Random();
 	double rand = Math.random() + 1;
 	private double RADIUS = 20.0;
+	private int health = 100;
+	private int score = 0;
 	private Circle circle1 = new Circle(100, -50, RADIUS);
 	private Circle circle2 = new Circle(200, -50, RADIUS);
 	private Circle circle3 = new Circle(300, -50, RADIUS);
@@ -34,15 +40,16 @@ public class fallingNotes extends Application{
 	private Circle clickCircle3 = new Circle(300, 590, RADIUS);
 	private Circle clickCircle4 = new Circle(400, 590, RADIUS);
 	private Circle clickCircle5 = new Circle(500, 590, RADIUS);
-	
-	int score = 0;
+	 
 	Text scenetitle = new Text("Score");
+	Text cHealth = new Text("100%");
 	
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		
 	    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+	    cHealth.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 	    
 		circle1.setRadius(RADIUS);
 		circle2.setRadius(RADIUS);
@@ -75,41 +82,48 @@ public class fallingNotes extends Application{
 
 		scenetitle.setLayoutX(300);
 		scenetitle.setLayoutY(300);
+		cHealth.setLayoutX(500);
+		cHealth.setLayoutY(100);
 		
 		Pane root = new Pane();
 		timeline.play();
 		root.getChildren().addAll(clickCircle1, clickCircle2, clickCircle3, clickCircle4, clickCircle5);
-		root.getChildren().add(scenetitle);
+		root.getChildren().addAll(scenetitle,cHealth);
         root.getChildren().addAll(circle1, circle2, circle3, circle4, circle5);
         Scene scene = new Scene(root, 600, 600);
         stage.setResizable(false);
         stage.setTitle("REEEEEEEEEEE");
         stage.setScene(scene);
         stage.show();
-        
+        // make sure to end game when the health reaches 0
+        // also change the keypressed to become an event listener. the onkeypressed is only working with 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {      
                 if(event.getCode() == KeyCode.D) {
                 	getPoints(circle1);
-                	scenetitle.setText("" + score + "");   
+                	scenetitle.setText("" + score + "");
+                	cHealth.setText("" + health + "%");
                 }
                 if(event.getCode() == KeyCode.F) {
                 	getPoints(circle2);
-                	scenetitle.setText("" + score + "");  
+                	scenetitle.setText("" + score + ""); 
+                	cHealth.setText("" + health + "%");
                 }
                 if (event.getCode() == KeyCode.SPACE){
                 	getPoints(circle3);
                 	scenetitle.setText("" + score + "");
+                	cHealth.setText("" + health + "%");
                 }    
                 if(event.getCode() == KeyCode.J) {
                 	getPoints(circle4);
-                	scenetitle.setText("" + score + "");   
-
+                	scenetitle.setText("" + score + "");  
+                	cHealth.setText("" + health + "%");
                 }
                 if(event.getCode() == KeyCode.K) {     
                 	getPoints(circle5);
                 	scenetitle.setText("" + score + "");   
+                	cHealth.setText("" + health + "%");
                 }
             }
         });
@@ -120,16 +134,20 @@ public class fallingNotes extends Application{
 		if (dumb.getCenterY() >= 570 && dumb.getCenterY() <= 600)
 		{
 			score = score + 300;
+			health += 2;
 		}
 		else if (dumb.getCenterY() >= 560 && dumb.getCenterY() <= 620)
 		{
 			score = score + 100;
+			health += 1;
 		}
 		else
 		{
 			score = score + 0;
+			health -= 10;
 		}
 	}
+	
 	
 	public static void main(String[] args) {
         Application.launch(args);    
