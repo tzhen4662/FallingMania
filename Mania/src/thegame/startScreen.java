@@ -85,6 +85,7 @@ public class startScreen extends Application
 		    primaryStage.setScene(scene);
 		    primaryStage.show();
 		    
+		    
 		    BackgroundImage Background= new BackgroundImage(new Image("images/spacey.jpg",600,600,false,true),
 		            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 		              BackgroundSize.DEFAULT);
