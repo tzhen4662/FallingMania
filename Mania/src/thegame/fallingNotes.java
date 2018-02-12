@@ -30,6 +30,7 @@ public class fallingNotes extends Application{
 	private double RADIUS = 20.0;
 	private int health = 100;
 	private int score = 0;
+	private int combo = 1;
 	private Circle circle1 = new Circle(100, -50, RADIUS);
 	private Circle circle2 = new Circle(200, -50, RADIUS);
 	private Circle circle3 = new Circle(300, -50, RADIUS);
@@ -43,13 +44,14 @@ public class fallingNotes extends Application{
 	 
 	Text scenetitle = new Text("Score");
 	Text cHealth = new Text("100%");
-	
+	Text cCombo = new Text("1x");
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		
 	    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 	    cHealth.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+	    cCombo.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 	    
 		circle1.setRadius(RADIUS);
 		circle2.setRadius(RADIUS);
@@ -84,11 +86,13 @@ public class fallingNotes extends Application{
 		scenetitle.setLayoutY(300);
 		cHealth.setLayoutX(500);
 		cHealth.setLayoutY(100);
+		cCombo.setLayoutX(500);
+		cCombo.setLayoutY(150);
 		
 		Pane root = new Pane();
 		timeline.play();
 		root.getChildren().addAll(clickCircle1, clickCircle2, clickCircle3, clickCircle4, clickCircle5);
-		root.getChildren().addAll(scenetitle,cHealth);
+		root.getChildren().addAll(scenetitle,cHealth,cCombo);
         root.getChildren().addAll(circle1, circle2, circle3, circle4, circle5);
         Scene scene = new Scene(root, 600, 600);
         stage.setResizable(false);
@@ -102,52 +106,60 @@ public class fallingNotes extends Application{
             public void handle(KeyEvent event) {      
                 if(event.getCode() == KeyCode.D) {
                 	getPoints(circle1);
-                	scenetitle.setText("" + score + "");
-                	cHealth.setText("" + health + "%");
+                	display();
                 }
                 if(event.getCode() == KeyCode.F) {
                 	getPoints(circle2);
-                	scenetitle.setText("" + score + ""); 
-                	cHealth.setText("" + health + "%");
+                	display();
                 }
                 if (event.getCode() == KeyCode.SPACE){
                 	getPoints(circle3);
-                	scenetitle.setText("" + score + "");
-                	cHealth.setText("" + health + "%");
+                	display();
                 }    
                 if(event.getCode() == KeyCode.J) {
                 	getPoints(circle4);
-                	scenetitle.setText("" + score + "");  
-                	cHealth.setText("" + health + "%");
+                	display();
                 }
                 if(event.getCode() == KeyCode.K) {     
                 	getPoints(circle5);
-                	scenetitle.setText("" + score + "");   
-                	cHealth.setText("" + health + "%");
+                	display();
                 }
             }
         });
 	}
-	
+	// remember to make it so that health can't go over 100
 	public void getPoints(Circle dumb)
 	{
 		if (dumb.getCenterY() >= 570 && dumb.getCenterY() <= 600)
 		{
-			score = score + 300;
-			health += 2;
+			combo += 1;
+			score = score + 300 * combo;
+			if(health + 2 <= 100) {
+				health += 2;
+			}
+			
 		}
 		else if (dumb.getCenterY() >= 560 && dumb.getCenterY() <= 620)
 		{
-			score = score + 100;
-			health += 1;
+			combo += 1;
+			score = score + 100 * combo;
+			if(health + 1 <= 100) {
+				health += 1;
+			}
 		}
 		else
 		{
+			combo = 1;
 			score = score + 0;
 			health -= 10;
 		}
 	}
 	
+	public void display() {
+		scenetitle.setText("" + score + "");   
+    	cHealth.setText("" + health + "%");
+    	cCombo.setText("" + combo + "x");
+	}
 	
 	public static void main(String[] args) {
         Application.launch(args);    
