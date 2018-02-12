@@ -134,13 +134,18 @@ public class fallingNotes extends Application{
 		{
 			combo += 1;
 			score = score + 300 * combo;
-			health += 2;
+			if(health + 2 <= 100) {
+				health += 2;
+			}
+			
 		}
 		else if (dumb.getCenterY() >= 560 && dumb.getCenterY() <= 620)
 		{
 			combo += 1;
 			score = score + 100 * combo;
-			health += 1;
+			if(health + 1 <= 100) {
+				health += 1;
+			}
 		}
 		else
 		{
