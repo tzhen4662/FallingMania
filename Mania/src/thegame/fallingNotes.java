@@ -127,7 +127,7 @@ public class fallingNotes extends Application{
             }
         });
 	}
-	// remember to make it so that health can't go over 100 
+	// remember to make it so that health can't go over 100
 	public void getPoints(Circle dumb)
 	{
 		if (dumb.getCenterY() >= 570 && dumb.getCenterY() <= 600)
