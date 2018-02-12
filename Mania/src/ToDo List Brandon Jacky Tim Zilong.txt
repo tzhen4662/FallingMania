@@ -1,0 +1,4 @@
+-Get arrayList from CSV Data to css highscore page
+-randomly falling circles
+-Misc stuff : combos and health, neaten up.
+ 

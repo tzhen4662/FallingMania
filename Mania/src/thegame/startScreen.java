@@ -23,7 +23,7 @@ public class startScreen extends Application
 		@Override
 		public void start(Stage primaryStage) throws Exception
 		{
-			cSVUlities(test1.csv);
+		//cSVUlities("test1.csv");
 		    //button CSS
 			Label Title = new Label();
 			Title.setText("Falling Mania");
