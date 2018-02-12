@@ -53,10 +53,10 @@ public class startScreen extends Application
 					+ "\nthe key at the right time when the circle \nis falling.");
 			button4.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			Button button5 = new Button();
-			button5.setText("ree");
+			button5.setText("reee");
 			button5.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			Button button6 = new Button();
-			button6.setText("REE");
+			button6.setText("REEE");
 			button6.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			Button endButton = new Button();
 			endButton.setText("Close");
