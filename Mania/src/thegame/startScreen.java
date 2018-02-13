@@ -1,6 +1,7 @@
 package thegame;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 import csv.cSVUlities;
 import javafx.application.Application;
@@ -15,6 +16,8 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 /**
  * 
@@ -23,6 +26,28 @@ import javafx.stage.Stage;
  */
 public class startScreen extends Application
 {
+		
+		private Random r = new Random();
+		double rand = Math.random() + 1;
+		private double RADIUS = 20.0;
+		private int health = 100;
+		private int score = 0;
+		private int combo = 1;
+		private Circle circle1 = new Circle(100, -50, RADIUS);
+		private Circle circle2 = new Circle(200, -50, RADIUS);
+		private Circle circle3 = new Circle(300, -50, RADIUS);
+		private Circle circle4 = new Circle(400, -50, RADIUS);
+		private Circle circle5 = new Circle(500, -50, RADIUS);
+		private Circle clickCircle1 = new Circle(100, 590, RADIUS);
+		private Circle clickCircle2 = new Circle(200, 590, RADIUS);
+		private Circle clickCircle3 = new Circle(300, 590, RADIUS);
+		private Circle clickCircle4 = new Circle(400, 590, RADIUS);
+		private Circle clickCircle5 = new Circle(500, 590, RADIUS);
+	 
+		Text scenetitle = new Text("Score");
+		Text cHealth = new Text("100%");
+		Text cCombo = new Text("1x");
+		
 		public static void main(String[] args){
 			Application.launch(args);
 		}
@@ -36,9 +61,9 @@ public class startScreen extends Application
 			header = data.getColumnHeaders();*/
 		   
 			//button CSS
-			Label Title = new Label();
-			Title.setText("Falling Mania");
-			Title.setStyle("-fx-background-color: #FFFFFF; -fx-font-size: 3em;	-fx-padding: 8 8 8 8; -fx-text-fill: #00CCCC; "
+			Label title = new Label();
+			title.setText("Falling Mania");
+			title.setStyle("-fx-background-color: #FFFFFF; -fx-font-size: 3em;	-fx-padding: 8 8 8 8; -fx-text-fill: #00CCCC; "
 					+ "-fx-border-width: 2; -fx-border-radius: 30; -fx-background-color: transparent; -fx-border-color: #99CCFF");
 			
 			Label controlTitle = new Label();
@@ -75,32 +100,24 @@ public class startScreen extends Application
 			endButton.setText("Close");
 			endButton.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
 			
-			Button BackButton = new Button();
-			BackButton.setText("Back");
-			BackButton.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+			Button backButton = new Button();
+			backButton.setText("Back");
+			backButton.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
 			
-			Button BackButton2 = new Button();
-			BackButton2.setText("Back");
-			BackButton2.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+			Button backButton2 = new Button();
+			backButton2.setText("Back");
+			backButton2.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
 
 
 		    //Buttons
 			Pane root = new Pane();
 			Pane root2 = new Pane();
 			Pane root3 = new Pane();
-			root.getChildren().add(Title);
-			root2.getChildren().add(controlTitle);
-		    root.getChildren().add(button);
-		    root.getChildren().add(button2);
-		    root.getChildren().add(button3);
-		    root2.getChildren().add(button4);
-		    root.getChildren().add(endButton);
-		    root2.getChildren().add(BackButton);
-		    root3.getChildren().add(BackButton2);
-		    root3.getChildren().add(button5);
-		    root3.getChildren().add(button6);
-		    Title.setLayoutX(190);
-			Title.setLayoutY(140);
+			root.getChildren().addAll(title, button, button2, button3, endButton);
+			root2.getChildren().addAll(controlTitle, button4, backButton);
+		    root3.getChildren().addAll(backButton2, button5, button6);
+		    title.setLayoutX(190);
+			title.setLayoutY(140);
 		    controlTitle.setLayoutX(220);
 			controlTitle.setLayoutY(140);
 			button.setLayoutX(270);
@@ -117,10 +134,10 @@ public class startScreen extends Application
 			button6.setLayoutY(240);
 			endButton.setLayoutX(0);
 			endButton.setLayoutY(0);
-			BackButton.setLayoutX(0);
-			BackButton.setLayoutY(0);
-			BackButton2.setLayoutX(0);
-			BackButton2.setLayoutY(0);
+			backButton.setLayoutX(0);
+			backButton.setLayoutY(0);
+			backButton2.setLayoutX(0);
+			backButton2.setLayoutY(0);
 		    
 			//Scenes
 			Scene scene = new Scene(root, 600, 600);
@@ -129,6 +146,7 @@ public class startScreen extends Application
 		    primaryStage.setScene(scene);
 		    primaryStage.show();
 		    
+		    //Background Image
 		    BackgroundImage Background= new BackgroundImage(new Image("images/spacey.jpg",600,600,false,true),
 		            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 		              BackgroundSize.DEFAULT);
@@ -157,10 +175,10 @@ public class startScreen extends Application
 	        	System.out.println("Controls ");
 			});
 		    endButton.setOnAction(e -> Platform.exit());
-			BackButton.setOnAction(value ->  {
+			backButton.setOnAction(value ->  {
 				primaryStage.setScene(scene)
 			;});
-			BackButton2.setOnAction(value ->  {
+			backButton2.setOnAction(value ->  {
 				primaryStage.setScene(scene)
 			;});
 		}
