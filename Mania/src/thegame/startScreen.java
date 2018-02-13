@@ -16,7 +16,11 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Zi long Yuen
+ *
+ */
 public class startScreen extends Application
 {
 		public static void main(String[] args){
@@ -30,40 +34,51 @@ public class startScreen extends Application
 			cSVUlities data = new cSVUlities(CVS);
 			ArrayList<String> header = new ArrayList<String>();
 			header = data.getColumnHeaders();*/
-		    //button CSS
+		   
+			//button CSS
 			Label Title = new Label();
 			Title.setText("Falling Mania");
 			Title.setStyle("-fx-background-color: #FFFFFF; -fx-font-size: 3em;	-fx-padding: 8 8 8 8; -fx-text-fill: #00CCCC; "
 					+ "-fx-border-width: 2; -fx-border-radius: 30; -fx-background-color: transparent; -fx-border-color: #99CCFF");
+			
 			Label controlTitle = new Label();
 			controlTitle.setText("Controls");
 			controlTitle.setStyle("-fx-background-color: #FFFFFF; -fx-font-size: 3em;	-fx-padding: 8 8 8 8; -fx-text-fill: #00CCCC; "
 					+ "-fx-border-width: 2; -fx-border-radius: 30; -fx-background-color: transparent; -fx-border-color: #99CCFF");
+			
 			Button button = new Button();
 			button.setText("Start");
 			button.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 20px; -fx-text-fill: white;");
+			
 			Button button2 = new Button();
 			button2.setText("Highscores");
 			button2.setStyle("-fx-border-color: #0000ff; -fx-background-color: #87CEEB; -fx-font-size: 20px; -fx-text-fill: white;");
+			
 			Button button3 = new Button();
 			button3.setText("Controls");
 			button3.setStyle("-fx-border-color: #0000ff; -fx-background-color: #87CEFA; -fx-font-size: 20px; -fx-text-fill: white;");
+			
 			Button button4 = new Button();
 			button4.setText("The controls are D, F, Space, J, and K. \nThe objective of the game is to press "
 					+ "\nthe key at the right time when the circle \nis falling.");
 			button4.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
+			
 			Button button5 = new Button();
 			button5.setText("reee");
 			button5.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
+			
 			Button button6 = new Button();
 			button6.setText("REEE");
 			button6.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
+			
 			Button endButton = new Button();
 			endButton.setText("Close");
 			endButton.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+			
 			Button BackButton = new Button();
 			BackButton.setText("Back");
 			BackButton.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+			
 			Button BackButton2 = new Button();
 			BackButton2.setText("Back");
 			BackButton2.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
@@ -106,7 +121,9 @@ public class startScreen extends Application
 			BackButton.setLayoutY(0);
 			BackButton2.setLayoutX(0);
 			BackButton2.setLayoutY(0);
-		    Scene scene = new Scene(root, 600, 600);
+		    
+			//Scenes
+			Scene scene = new Scene(root, 600, 600);
 		    Scene control = new Scene(root2, 600, 600);
 		    Scene highscore = new Scene(root3, 600, 600);
 		    primaryStage.setScene(scene);
