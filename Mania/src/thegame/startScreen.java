@@ -284,7 +284,7 @@ public class startScreen extends Application
 			}
 			else
 			{
-				combo = 1;
+				combo = 0;
 				score = score + 0;
 				health -= 10;
 			}
