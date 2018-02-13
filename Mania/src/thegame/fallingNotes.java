@@ -30,7 +30,8 @@ public class fallingNotes extends Application{
 	private double RADIUS = 20.0;
 	private int health = 100;
 	private int score = 0;
-	private int combo = 1;
+	private int combo = 0;
+	private boolean gameOn = true;
 	private Circle circle1 = new Circle(100, -50, RADIUS);
 	private Circle circle2 = new Circle(200, -50, RADIUS);
 	private Circle circle3 = new Circle(300, -50, RADIUS);
@@ -44,7 +45,7 @@ public class fallingNotes extends Application{
 	 
 	Text scenetitle = new Text("Score");
 	Text cHealth = new Text("100%");
-	Text cCombo = new Text("1x");
+	Text cCombo = new Text("0x");
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -60,7 +61,7 @@ public class fallingNotes extends Application{
 		circle5.setRadius(RADIUS);
 		
 		Timeline timeline = new Timeline();
-		timeline.setCycleCount(10);
+		timeline.setCycleCount(timeline.INDEFINITE);
 		KeyFrame kf1 = new KeyFrame(Duration.seconds(1.5),
 				//new KeyValue(circle1.centerXProperty(), 100),
 				new KeyValue(circle1.centerYProperty(), 650));
@@ -101,32 +102,35 @@ public class fallingNotes extends Application{
         stage.show();
         // make sure to end game when the health reaches 0
         // also change the keypressed to become an event listener. the onkeypressed is only working with 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {      
-                if(event.getCode() == KeyCode.D) {
-                	getPoints(circle1);
-                	display();
-                }
-                if(event.getCode() == KeyCode.F) {
-                	getPoints(circle2);
-                	display();
-                }
-                if (event.getCode() == KeyCode.SPACE){
-                	getPoints(circle3);
-                	display();
-                }    
-                if(event.getCode() == KeyCode.J) {
-                	getPoints(circle4);
-                	display();
-                }
-                if(event.getCode() == KeyCode.K) {     
-                	getPoints(circle5);
-                	display();
-                }
-            }
-        });
-	}
+        // find out how to 
+        //while(gameOn) {
+        	scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        		@Override
+        		public void handle(KeyEvent event) {      
+        			if(event.getCode() == KeyCode.D) {
+        				getPoints(circle1);
+        				display();
+        			}
+        			if(event.getCode() == KeyCode.F) {
+        				getPoints(circle2);
+        				display();
+        			}
+        			if (event.getCode() == KeyCode.SPACE){
+        				getPoints(circle3);
+        				display();
+        			}    
+        			if(event.getCode() == KeyCode.J) {
+        				getPoints(circle4);
+        				display();
+        			}
+        			if(event.getCode() == KeyCode.K) {  
+        				getPoints(circle5);
+        				display();
+        			}
+        		}
+        	});
+        }
+	//}
 	// remember to make it so that health can't go over 100
 	public void getPoints(Circle dumb)
 	{
@@ -149,7 +153,7 @@ public class fallingNotes extends Application{
 		}
 		else
 		{
-			combo = 1;
+			combo = 0;
 			score = score + 0;
 			health -= 10;
 		}
@@ -160,6 +164,14 @@ public class fallingNotes extends Application{
     	cHealth.setText("" + health + "%");
     	cCombo.setText("" + combo + "x");
 	}
+	
+	public void resetGame() {
+		gameOn = false;
+		health = 100;
+		score = 0;
+		combo = 0;
+	}
+	
 	
 	public static void main(String[] args) {
         Application.launch(args);    
