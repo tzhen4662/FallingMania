@@ -42,6 +42,8 @@ public class startScreen extends Application
 		private int health = 100;
 		private int score = 0;
 		private int combo = 1;
+		private int windowX = 600;
+		private int windowY = 600;
 		private Circle circle1 = new Circle(100, -50, RADIUS);
 		private Circle circle2 = new Circle(200, -50, RADIUS);
 		private Circle circle3 = new Circle(300, -50, RADIUS);
@@ -150,10 +152,10 @@ public class startScreen extends Application
 			backButton2.setLayoutY(0);
 		    
 			//Scenes
-			Scene scene = new Scene(root, 600, 600);
-		    Scene control = new Scene(root2, 600, 600);
-		    Scene highscore = new Scene(root3, 600, 600);	       
-		    Scene game = new Scene(gameRoot, 600, 600);
+			Scene scene = new Scene(root, windowX, windowY);
+		    Scene control = new Scene(root2, windowX, windowY);
+		    Scene highscore = new Scene(root3, windowX, windowY);	       
+		    Scene game = new Scene(gameRoot, windowX, windowY);
 		    primaryStage.setResizable(false);
 		    primaryStage.setScene(scene);
 		    primaryStage.show();
@@ -187,19 +189,14 @@ public class startScreen extends Application
 			Timeline timeline = new Timeline();
 			timeline.setCycleCount(10);
 			KeyFrame kf1 = new KeyFrame(Duration.seconds(1.5),
-					//new KeyValue(circle1.centerXProperty(), 100),
 					new KeyValue(circle1.centerYProperty(), 650));
 			KeyFrame kf2 = new KeyFrame(Duration.seconds(1.5),
-					//new KeyValue(circle2.centerXProperty(), 200),
 	                new KeyValue(circle2.centerYProperty(), 650));
 			KeyFrame kf3 = new KeyFrame(Duration.seconds(1.5),
-	               // new KeyValue(circle3.centerXProperty(), 300),
 					new KeyValue(circle3.centerYProperty(), 650));
 			KeyFrame kf4 = new KeyFrame(Duration.seconds(1.5),
-	               // new KeyValue(circle4.centerXProperty(), 400),
 	                new KeyValue(circle4.centerYProperty(), 650));
 			KeyFrame kf5 = new KeyFrame(Duration.seconds(1.5),
-	                //new KeyValue(circle5.centerXProperty(), 500),
 	                new KeyValue(circle5.centerYProperty(), 650));
 	        timeline.getKeyFrames().addAll(kf1, kf2, kf3, kf4, kf5);
 
@@ -216,7 +213,7 @@ public class startScreen extends Application
 	        
 	        // make sure to end game when the health reaches 0
 	        // also change the keypressed to become an event listener. the onkeypressed is only working with 
-	        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	        game.setOnKeyPressed(new EventHandler<KeyEvent>() {
 	            @Override
 	            public void handle(KeyEvent event) {      
 	                if(event.getCode() == KeyCode.D) {
