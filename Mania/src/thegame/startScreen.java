@@ -66,12 +66,12 @@ public class startScreen extends Application
 		@Override
 		public void start(Stage primaryStage) throws Exception
 		{
-			/*File CVS = new File("test1.csv");
+			File CVS = new File("src/csv/test1.csv");
 			cSVUlities data = new cSVUlities(CVS);
-			ArrayList<String> header = new ArrayList<String>();
-			header = data.getColumnHeaders();*/
-		   
-			//button CSS
+			ArrayList<String> Names = new ArrayList<String>();
+			ArrayList<String> Score = new ArrayList<String>();
+			Names = data.getColumnData(0);
+			Score = data.getColumnData(1);	
 			Label title = new Label();
 			title.setText("Falling Mania");
 			title.setStyle("-fx-background-color: #FFFFFF; -fx-font-size: 3em;	-fx-padding: 8 8 8 8; -fx-text-fill: #00CCCC; "
@@ -118,16 +118,21 @@ public class startScreen extends Application
 			Button backButton2 = new Button();
 			backButton2.setText("Back");
 			backButton2.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
-
-
+			
 		    //Buttons
+			Text t1 = new Text (150, 200, Names.get(0));
+			Text t2 = new Text (150, 250, Names.get(1));
+			Text t3 = new Text (150, 300, Names.get(2));
+			Text t4 = new Text (350, 200, Score.get(0));
+			Text t5 = new Text (350, 250, Score.get(1));
+			Text t6 = new Text (350, 300, Score.get(2));
 			Pane root = new Pane();
 			Pane root2 = new Pane();
 			Pane root3 = new Pane();
 			Pane gameRoot = new Pane();
 			root.getChildren().addAll(title, button, button2, button3, endButton);
 			root2.getChildren().addAll(controlTitle, button4, backButton);
-		    root3.getChildren().addAll(backButton2, button5, button6);
+		    root3.getChildren().addAll(backButton2, button5, button6,t1,t2,t3,t4,t5,t6);
 		    title.setLayoutX(190);
 			title.setLayoutY(140);
 		    controlTitle.setLayoutX(220);
