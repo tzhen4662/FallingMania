@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import csv.cSVUlities;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -17,8 +23,11 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 /**
  * 
  * @author Zi long Yuen
@@ -113,6 +122,7 @@ public class startScreen extends Application
 			Pane root = new Pane();
 			Pane root2 = new Pane();
 			Pane root3 = new Pane();
+			Pane gameRoot = new Pane();
 			root.getChildren().addAll(title, button, button2, button3, endButton);
 			root2.getChildren().addAll(controlTitle, button4, backButton);
 		    root3.getChildren().addAll(backButton2, button5, button6);
@@ -142,7 +152,9 @@ public class startScreen extends Application
 			//Scenes
 			Scene scene = new Scene(root, 600, 600);
 		    Scene control = new Scene(root2, 600, 600);
-		    Scene highscore = new Scene(root3, 600, 600);
+		    Scene highscore = new Scene(root3, 600, 600);	       
+		    Scene game = new Scene(gameRoot, 600, 600);
+		    primaryStage.setResizable(false);
 		    primaryStage.setScene(scene);
 		    primaryStage.show();
 		    
@@ -160,10 +172,80 @@ public class startScreen extends Application
 		              BackgroundSize.DEFAULT);
 		    root3.setBackground(new Background(highscoreBackground));
 
+		    //Game
+		    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		    cHealth.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		    cCombo.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		    
+			circle1.setRadius(RADIUS);
+			circle2.setRadius(RADIUS);
+			circle3.setRadius(RADIUS);
+			circle4.setRadius(RADIUS);
+			circle5.setRadius(RADIUS);
+			
+			//Timeline 
+			Timeline timeline = new Timeline();
+			timeline.setCycleCount(10);
+			KeyFrame kf1 = new KeyFrame(Duration.seconds(1.5),
+					//new KeyValue(circle1.centerXProperty(), 100),
+					new KeyValue(circle1.centerYProperty(), 650));
+			KeyFrame kf2 = new KeyFrame(Duration.seconds(1.5),
+					//new KeyValue(circle2.centerXProperty(), 200),
+	                new KeyValue(circle2.centerYProperty(), 650));
+			KeyFrame kf3 = new KeyFrame(Duration.seconds(1.5),
+	               // new KeyValue(circle3.centerXProperty(), 300),
+					new KeyValue(circle3.centerYProperty(), 650));
+			KeyFrame kf4 = new KeyFrame(Duration.seconds(1.5),
+	               // new KeyValue(circle4.centerXProperty(), 400),
+	                new KeyValue(circle4.centerYProperty(), 650));
+			KeyFrame kf5 = new KeyFrame(Duration.seconds(1.5),
+	                //new KeyValue(circle5.centerXProperty(), 500),
+	                new KeyValue(circle5.centerYProperty(), 650));
+	        timeline.getKeyFrames().addAll(kf1, kf2, kf3, kf4, kf5);
+
+			scenetitle.setLayoutX(300);
+			scenetitle.setLayoutY(300);
+			cHealth.setLayoutX(500);
+			cHealth.setLayoutY(100);
+			cCombo.setLayoutX(500);
+			cCombo.setLayoutY(150);
+			
+			gameRoot.getChildren().addAll(clickCircle1, clickCircle2, clickCircle3, clickCircle4, clickCircle5);
+			gameRoot.getChildren().addAll(scenetitle,cHealth,cCombo);
+	        gameRoot.getChildren().addAll(circle1, circle2, circle3, circle4, circle5);
+	        
+	        // make sure to end game when the health reaches 0
+	        // also change the keypressed to become an event listener. the onkeypressed is only working with 
+	        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	            @Override
+	            public void handle(KeyEvent event) {      
+	                if(event.getCode() == KeyCode.D) {
+	                	getPoints(circle1);
+	                	display();
+	                }
+	                if(event.getCode() == KeyCode.F) {
+	                	getPoints(circle2);
+	                	display();
+	                }
+	                if (event.getCode() == KeyCode.SPACE){
+	                	getPoints(circle3);
+	                	display();
+	                }    
+	                if(event.getCode() == KeyCode.J) {
+	                	getPoints(circle4);
+	                	display();
+	                }
+	                if(event.getCode() == KeyCode.K) {     
+	                	getPoints(circle5);
+	                	display();
+	                }
+	            }
+	        });
 		    
 			//Button Actions
 			button.setOnAction(value ->  {
-	        	System.out.println("Starting ");
+	        	primaryStage.setScene(game);
+	        	timeline.play();
 			});
 			button2.setOnAction(value ->  {
 				primaryStage.setScene(highscore)
@@ -181,5 +263,39 @@ public class startScreen extends Application
 			backButton2.setOnAction(value ->  {
 				primaryStage.setScene(scene)
 			;});
+		}
+		
+		// remember to make it so that health can't go over 100
+		public void getPoints(Circle dumb)
+		{
+			if (dumb.getCenterY() >= 570 && dumb.getCenterY() <= 600)
+			{
+				combo += 1;
+				score = score + 300 * combo;
+				if(health + 2 <= 100) {
+					health += 2;
+				}
+				
+			}
+			else if (dumb.getCenterY() >= 560 && dumb.getCenterY() <= 620)
+			{
+				combo += 1;
+				score = score + 100 * combo;
+				if(health + 1 <= 100) {
+					health += 1;
+				}
+			}
+			else
+			{
+				combo = 1;
+				score = score + 0;
+				health -= 10;
+			}
+		}
+		
+		public void display() {
+			scenetitle.setText("" + score + "");   
+	    	cHealth.setText("" + health + "%");
+	    	cCombo.setText("" + combo + "x");
 		}
 }
