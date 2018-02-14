@@ -1,8 +1,12 @@
 package thegame;
+/**
+ * 
+ * @author Zi long Yuen
+ *
+ */
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
-
 import csv.cSVUlities;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -28,11 +32,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-/**
- * 
- * @author Zi long Yuen
- *
- */
+
 public class startScreen extends Application
 {
 		
@@ -100,11 +100,11 @@ public class startScreen extends Application
 			button4.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			
 			Button button5 = new Button();
-			button5.setText("reee");
+			button5.setText("Name");
 			button5.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			
 			Button button6 = new Button();
-			button6.setText("REEE");
+			button6.setText("Score");
 			button6.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			
 			Button endButton = new Button();
@@ -118,6 +118,10 @@ public class startScreen extends Application
 			Button backButton2 = new Button();
 			backButton2.setText("Back");
 			backButton2.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+			
+			Button backButton3 = new Button();
+			backButton3.setText("Back");
+			backButton3.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
 			
 		    //Buttons
 			Text t1 = new Text (150, 200, "");
@@ -133,6 +137,7 @@ public class startScreen extends Application
 			root.getChildren().addAll(title, button, button2, button3, endButton);
 			root2.getChildren().addAll(controlTitle, button4, backButton);
 		    root3.getChildren().addAll(backButton2, button5, button6,t1,t2,t3,t4,t5,t6);
+		    gameRoot.getChildren().addAll(backButton3);
 		    title.setLayoutX(190);
 			title.setLayoutY(140);
 		    controlTitle.setLayoutX(220);
@@ -145,16 +150,18 @@ public class startScreen extends Application
 			button3.setLayoutY(370);
 			button4.setLayoutX(90);
 			button4.setLayoutY(240);
-			button5.setLayoutX(90);
-			button5.setLayoutY(240);
+			button5.setLayoutX(150);
+			button5.setLayoutY(100);
 			button6.setLayoutX(350);
-			button6.setLayoutY(240);
+			button6.setLayoutY(100);
 			endButton.setLayoutX(0);
 			endButton.setLayoutY(0);
 			backButton.setLayoutX(0);
 			backButton.setLayoutY(0);
 			backButton2.setLayoutX(0);
 			backButton2.setLayoutY(0);
+			backButton3.setLayoutX(0);
+			backButton3.setLayoutY(0);
 		    
 			//Scenes
 			Scene scene = new Scene(root, windowX, windowY);
@@ -263,6 +270,9 @@ public class startScreen extends Application
 				primaryStage.setScene(scene)
 			;});
 			backButton2.setOnAction(value ->  {
+				primaryStage.setScene(scene)
+			;});
+			backButton3.setOnAction(value ->  {
 				primaryStage.setScene(scene)
 			;});
 		}
