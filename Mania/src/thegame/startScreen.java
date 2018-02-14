@@ -66,7 +66,7 @@ public class startScreen extends Application
 		@Override
 		public void start(Stage primaryStage) throws Exception
 		{
-			File CVS = new File("src/csv/test1.csv");
+			File CVS = new File("src/csv/ScoreSheet.csv");
 			cSVUlities data = new cSVUlities(CVS);
 			ArrayList<String> Names = new ArrayList<String>();
 			ArrayList<String> Score = new ArrayList<String>();
@@ -100,11 +100,11 @@ public class startScreen extends Application
 			button4.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			
 			Button button5 = new Button();
-			button5.setText("reee");
+			button5.setText("Name");
 			button5.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			
 			Button button6 = new Button();
-			button6.setText("REEE");
+			button6.setText("Score");
 			button6.setStyle("-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 			
 			Button endButton = new Button();
@@ -120,12 +120,21 @@ public class startScreen extends Application
 			backButton2.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
 			
 		    //Buttons
-			Text t1 = new Text (150, 200, Names.get(0));
-			Text t2 = new Text (150, 250, Names.get(1));
-			Text t3 = new Text (150, 300, Names.get(2));
-			Text t4 = new Text (350, 200, Score.get(0));
-			Text t5 = new Text (350, 250, Score.get(1));
-			Text t6 = new Text (350, 300, Score.get(2));
+			//if(Names.get(2) != null)
+			//{
+			//Text t1 = new Text (150, 200, Names.get(0));
+			//Text t2 = new Text (150, 250, Names.get(1));
+			//Text t3 = new Text (150, 300, Names.get(2));
+			//Text t4 = new Text (350, 200, Score.get(0));
+			//Text t5 = new Text (350, 250, Score.get(1));
+			//Text t6 = new Text (350, 300, Score.get(2));
+			//o}
+			Text t1 = new Text (150, 200, "");
+			Text t2 = new Text (150, 250, "");
+			Text t3 = new Text (150, 300, "");
+			Text t4 = new Text (350, 200, "");
+			Text t5 = new Text (350, 250, "");
+			Text t6 = new Text (350, 300, "");
 			Pane root = new Pane();
 			Pane root2 = new Pane();
 			Pane root3 = new Pane();
@@ -145,10 +154,10 @@ public class startScreen extends Application
 			button3.setLayoutY(370);
 			button4.setLayoutX(90);
 			button4.setLayoutY(240);
-			button5.setLayoutX(90);
-			button5.setLayoutY(240);
+			button5.setLayoutX(150);
+			button5.setLayoutY(100);
 			button6.setLayoutX(350);
-			button6.setLayoutY(240);
+			button6.setLayoutY(100);
 			endButton.setLayoutX(0);
 			endButton.setLayoutY(0);
 			backButton.setLayoutX(0);
