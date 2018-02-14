@@ -1,8 +1,5 @@
 package thegame;
 
-import java.util.Random;
-
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -27,18 +24,17 @@ import javafx.util.Duration;
  */
 public class fallingNotes extends Application{
 
-	private Random r = new Random();
-	double r1 = Math.random() + 1;
-	double r2 = Math.random() + 1;
-	double r3 = Math.random() + 1;
-	double r4 = Math.random() + 1;
-	double r5 = Math.random() + 1;
+	double r1 = Math.random() + 2;
+	double r2 = Math.random() + 2;
+	double r3 = Math.random() + 2;
+	double r4 = Math.random() + 2;
+	double r5 = Math.random() + 2;
 	
+	private int LENGTHOFGAME = 10;
 	private double RADIUS = 20.0;
 	private int health = 100;
 	private int score = 0;
 	private int combo = 0;
-	private boolean gameOn = true;
 	private Circle circle1 = new Circle(100, -50, RADIUS);
 	private Circle circle2 = new Circle(200, -50, RADIUS);
 	private Circle circle3 = new Circle(300, -50, RADIUS);
@@ -72,27 +68,23 @@ public class fallingNotes extends Application{
 		circle4.setRadius(RADIUS);
 		circle5.setRadius(RADIUS);
 		
-		timeline1.setCycleCount(timeline1.INDEFINITE);
-		timeline2.setCycleCount(timeline2.INDEFINITE);
-		timeline3.setCycleCount(timeline3.INDEFINITE);
-		timeline4.setCycleCount(timeline4.INDEFINITE);
-		timeline5.setCycleCount(timeline5.INDEFINITE);
+		timeline1.setCycleCount(LENGTHOFGAME);
+		timeline2.setCycleCount(LENGTHOFGAME);
+		timeline3.setCycleCount(LENGTHOFGAME);
+		timeline4.setCycleCount(LENGTHOFGAME);
+		timeline5.setCycleCount(LENGTHOFGAME);
 		
 		KeyFrame kf1 = new KeyFrame(Duration.seconds(r1),
-				//new KeyValue(circle1.centerXProperty(), 100),
 				new KeyValue(circle1.centerYProperty(), 650));
 		KeyFrame kf2 = new KeyFrame(Duration.seconds(r2),
-				//new KeyValue(circle2.centerXProperty(), 200),
                 new KeyValue(circle2.centerYProperty(), 650));
 		KeyFrame kf3 = new KeyFrame(Duration.seconds(r3),
-               // new KeyValue(circle3.centerXProperty(), 300),
 				new KeyValue(circle3.centerYProperty(), 650));
 		KeyFrame kf4 = new KeyFrame(Duration.seconds(r4),
-               // new KeyValue(circle4.centerXProperty(), 400),
                 new KeyValue(circle4.centerYProperty(), 650));
 		KeyFrame kf5 = new KeyFrame(Duration.seconds(r5),
-                //new KeyValue(circle5.centerXProperty(), 500),
                 new KeyValue(circle5.centerYProperty(), 650));
+		
         timeline1.getKeyFrames().add(kf1);
         timeline2.getKeyFrames().add(kf2);
         timeline3.getKeyFrames().add(kf3);
@@ -122,44 +114,44 @@ public class fallingNotes extends Application{
         {
         	checkHealth();
         }*/
-    		timeline1.play();
-    		timeline2.play();
-    		timeline3.play();
-    		timeline4.play();
-    		timeline5.play();
+    	timeline1.play();
+    	timeline2.play();
+    	timeline3.play();
+    	timeline4.play();
+    	timeline5.play();
     		
-        	scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-        		@Override
-        		public void handle(KeyEvent event) {      
-        			if(event.getCode() == KeyCode.D) {
-        				checkHealth();
-        				getPoints(circle1);
-        				display();
-        			}
-        			if(event.getCode() == KeyCode.F) {
-        				checkHealth();
-        				getPoints(circle2);
-        				display();
-        			}
-        			if (event.getCode() == KeyCode.SPACE){
-        				checkHealth();
-        				getPoints(circle3);
-        				display();
-        			}    
-        			if(event.getCode() == KeyCode.J) {
-        				checkHealth();
-        				getPoints(circle4);
-        				display();
-        			}
-        			if(event.getCode() == KeyCode.K) {
-        				checkHealth();
-        				getPoints(circle5);
-        				display();
-        			}
-        			
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        	@Override
+        	public void handle(KeyEvent event) {      
+        		if(event.getCode() == KeyCode.D) {
+        			checkHealth();
+        			getPoints(circle1);
+        			display();
         		}
-        	});
-        }
+        		if(event.getCode() == KeyCode.F) {
+        			checkHealth();
+        			getPoints(circle2);
+        			display();
+        		}
+        		if (event.getCode() == KeyCode.SPACE){
+        			checkHealth();
+        			getPoints(circle3);
+        			display();
+        		}    
+        		if(event.getCode() == KeyCode.J) {
+        			checkHealth();
+        			getPoints(circle4);
+        			display();
+        		}
+        		if(event.getCode() == KeyCode.K) {
+        			checkHealth();
+        			getPoints(circle5);
+        			display();
+        		}
+        			
+        	}
+        });
+     }
 	// remember to make it so that health can't go over 100
 	public void getPoints(Circle dumb)
 	{
@@ -201,13 +193,11 @@ public class fallingNotes extends Application{
 	public void resetGame() {
 		health = 100;
 		score = 0;
-		combo = 0;
-		
+		combo = 0;	
 	}
 	
 	public void checkHealth() {
 		if(health <= 0) {
-			gameOn = false;
 			timeline1.stop();
 			timeline2.stop();
 			timeline3.stop();
