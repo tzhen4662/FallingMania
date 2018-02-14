@@ -72,6 +72,7 @@ public class startScreen extends Application
 			ArrayList<String> Score = new ArrayList<String>();
 			Names = data.getColumnData(0);
 			Score = data.getColumnData(1);	
+			
 			Label title = new Label();
 			title.setText("Falling Mania");
 			title.setStyle("-fx-background-color: #FFFFFF; -fx-font-size: 3em;	-fx-padding: 8 8 8 8; -fx-text-fill: #00CCCC; "
