@@ -123,6 +123,18 @@ public class startScreen extends Application
 			backButton3.setText("Back");
 			backButton3.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
 			
+			Button easy = new Button();
+			easy.setText("Easy");
+			easy.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+			
+			Button normal = new Button();
+			normal.setText("Normal");
+			normal.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+			
+			Button hard = new Button();
+			hard.setText("Hard");
+			hard.setStyle("-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+			
 		    //Buttons
 			Text t1 = new Text (150, 200, "");
 			Text t2 = new Text (150, 250, "");
@@ -134,10 +146,12 @@ public class startScreen extends Application
 			Pane root2 = new Pane();
 			Pane root3 = new Pane();
 			Pane gameRoot = new Pane();
+			Pane Diff = new Pane();
 			root.getChildren().addAll(title, button, button2, button3, endButton);
 			root2.getChildren().addAll(controlTitle, button4, backButton);
 		    root3.getChildren().addAll(backButton2, button5, button6,t1,t2,t3,t4,t5,t6);
 		    gameRoot.getChildren().addAll(backButton3);
+		    Diff.getChildren().addAll(easy, normal, hard);
 		    title.setLayoutX(190);
 			title.setLayoutY(140);
 		    controlTitle.setLayoutX(220);
@@ -162,12 +176,19 @@ public class startScreen extends Application
 			backButton2.setLayoutY(0);
 			backButton3.setLayoutX(0);
 			backButton3.setLayoutY(0);
+			easy.setLayoutX(280);
+			easy.setLayoutY(200);
+			normal.setLayoutX(280);
+			normal.setLayoutY(250);
+			hard.setLayoutX(280);
+			hard.setLayoutY(300);
 		    
 			//Scenes
 			Scene scene = new Scene(root, windowX, windowY);
 		    Scene control = new Scene(root2, windowX, windowY);
 		    Scene highscore = new Scene(root3, windowX, windowY);	       
 		    Scene game = new Scene(gameRoot, windowX, windowY);
+		    Scene Mode = new Scene(Diff, windowX, windowY);
 		    primaryStage.setResizable(false);
 		    primaryStage.setScene(scene);
 		    primaryStage.show();
@@ -185,6 +206,7 @@ public class startScreen extends Application
 		            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 		              BackgroundSize.DEFAULT);
 		    root3.setBackground(new Background(highscoreBackground));
+		    Diff.setBackground(new Background(highscoreBackground));
 
 		    //Game
 		    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -253,7 +275,7 @@ public class startScreen extends Application
 		    
 			//Button Actions
 			button.setOnAction(value ->  {
-	        	primaryStage.setScene(game);
+	        	primaryStage.setScene(Mode);
 	        	timeline.play();
 			});
 			button2.setOnAction(value ->  {
