@@ -1,4 +1,4 @@
-package thegame;
+ package thegame;
 /**
  * 
  * @author Zi long Yuen
@@ -36,28 +36,38 @@ import javafx.util.Duration;
 public class startScreen extends Application
 {
 		
-		private Random r = new Random();
-		double rand = Math.random() + 1;
-		private double RADIUS = 20.0;
-		private int health = 100;
-		private int score = 0;
-		private int combo = 1;
-		private int windowX = 600;
-		private int windowY = 600;
-		private Circle circle1 = new Circle(100, -50, RADIUS);
-		private Circle circle2 = new Circle(200, -50, RADIUS);
-		private Circle circle3 = new Circle(300, -50, RADIUS);
-		private Circle circle4 = new Circle(400, -50, RADIUS);
-		private Circle circle5 = new Circle(500, -50, RADIUS);
-		private Circle clickCircle1 = new Circle(100, 590, RADIUS);
-		private Circle clickCircle2 = new Circle(200, 590, RADIUS);
-		private Circle clickCircle3 = new Circle(300, 590, RADIUS);
-		private Circle clickCircle4 = new Circle(400, 590, RADIUS);
-		private Circle clickCircle5 = new Circle(500, 590, RADIUS);
+	double r1 = Math.random() + 2;
+	double r2 = Math.random() + 2;
+	double r3 = Math.random() + 2;
+	double r4 = Math.random() + 2;
+	double r5 = Math.random() + 2;
+	
+	private int LENGTHOFGAME = 10;
+	private double RADIUS = 20.0;
+	private int health = 100;
+	private int score = 0;
+	private int combo = 0;
+	private int windowX = 600;
+	private int windowY = 600;
+	private Circle circle1 = new Circle(100, -50, RADIUS);
+	private Circle circle2 = new Circle(200, -50, RADIUS);
+	private Circle circle3 = new Circle(300, -50, RADIUS);
+	private Circle circle4 = new Circle(400, -50, RADIUS);
+	private Circle circle5 = new Circle(500, -50, RADIUS);
+	private Circle clickCircle1 = new Circle(100, 590, RADIUS);
+	private Circle clickCircle2 = new Circle(200, 590, RADIUS);
+	private Circle clickCircle3 = new Circle(300, 590, RADIUS);
+	private Circle clickCircle4 = new Circle(400, 590, RADIUS);
+	private Circle clickCircle5 = new Circle(500, 590, RADIUS);
+	Timeline timeline1 = new Timeline();
+	Timeline timeline2 = new Timeline();
+	Timeline timeline3 = new Timeline();
+	Timeline timeline4 = new Timeline();
+	Timeline timeline5 = new Timeline();
 	 
-		Text scenetitle = new Text("Score");
-		Text cHealth = new Text("100%");
-		Text cCombo = new Text("1x");
+	Text cScore = new Text("Score");
+	Text cHealth = new Text("100%");
+	Text cCombo = new Text("0x");
 		
 		public static void main(String[] args){
 			Application.launch(args);
@@ -210,7 +220,7 @@ public class startScreen extends Application
 		    Diff.setBackground(new Background(highscoreBackground));
 
 		    //Game
-		    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		    cScore.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		    cHealth.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		    cCombo.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		    
@@ -233,17 +243,21 @@ public class startScreen extends Application
 	                new KeyValue(circle4.centerYProperty(), 650));
 			KeyFrame kf5 = new KeyFrame(Duration.seconds(1.5),
 	                new KeyValue(circle5.centerYProperty(), 650));
-	        timeline.getKeyFrames().addAll(kf1, kf2, kf3, kf4, kf5);
+			 timeline1.getKeyFrames().add(kf1);
+		     timeline2.getKeyFrames().add(kf2);
+		     timeline3.getKeyFrames().add(kf3);
+		     timeline4.getKeyFrames().add(kf4);
+		     timeline5.getKeyFrames().add(kf5);
 
-			scenetitle.setLayoutX(300);
-			scenetitle.setLayoutY(300);
+			cScore.setLayoutX(300);
+			cScore.setLayoutY(300);
 			cHealth.setLayoutX(500);
 			cHealth.setLayoutY(100);
 			cCombo.setLayoutX(500);
 			cCombo.setLayoutY(150);
 			
 			gameRoot.getChildren().addAll(clickCircle1, clickCircle2, clickCircle3, clickCircle4, clickCircle5);
-			gameRoot.getChildren().addAll(scenetitle,cHealth,cCombo);
+			gameRoot.getChildren().addAll(cScore,cHealth,cCombo);
 	        gameRoot.getChildren().addAll(circle1, circle2, circle3, circle4, circle5);
 	        
 	        // make sure to end game when the health reaches 0
@@ -251,27 +265,32 @@ public class startScreen extends Application
 	        game.setOnKeyPressed(new EventHandler<KeyEvent>() {
 	            @Override
 	            public void handle(KeyEvent event) {      
-	                if(event.getCode() == KeyCode.D) {
-	                	getPoints(circle1);
-	                	display();
-	                }
-	                if(event.getCode() == KeyCode.F) {
-	                	getPoints(circle2);
-	                	display();
-	                }
-	                if (event.getCode() == KeyCode.SPACE){
-	                	getPoints(circle3);
-	                	display();
-	                }    
-	                if(event.getCode() == KeyCode.J) {
-	                	getPoints(circle4);
-	                	display();
-	                }
-	                if(event.getCode() == KeyCode.K) {     
-	                	getPoints(circle5);
-	                	display();
-	                }
-	            }
+	        		if(event.getCode() == KeyCode.D) {
+	        			checkHealth();
+	        			getPoints(circle1);
+	        			display();
+	        		}
+	        		if(event.getCode() == KeyCode.F) {
+	        			checkHealth();
+	        			getPoints(circle2);
+	        			display();
+	        		}
+	        		if (event.getCode() == KeyCode.SPACE){
+	        			checkHealth();
+	        			getPoints(circle3);
+	        			display();
+	        		}    
+	        		if(event.getCode() == KeyCode.J) {
+	        			checkHealth();
+	        			getPoints(circle4);
+	        			display();
+	        		}
+	        		if(event.getCode() == KeyCode.K) {
+	        			checkHealth();
+	        			getPoints(circle5);
+	        			display();
+	        		}	
+	        	}
 	        });
 		    
 			//Button Actions
@@ -324,13 +343,35 @@ public class startScreen extends Application
 			{
 				combo = 0;
 				score = score + 0;
-				health -= 10;
+				if(health - 10 >= 0) {
+					health -= 10;
+				}
+				else
+					health = 0;
 			}
 		}
 		
 		public void display() {
-			scenetitle.setText("" + score + "");   
+			cScore.setText("" + score + "");   
 	    	cHealth.setText("" + health + "%");
 	    	cCombo.setText("" + combo + "x");
+		}
+		
+		public void resetGame() {
+			health = 100;
+			score = 0;
+			combo = 0;	
+		}
+		
+		public void checkHealth() {
+			if(health <= 0) {
+				timeline1.stop();
+				timeline2.stop();
+				timeline3.stop();
+				timeline4.stop();
+				timeline5.stop();
+				cScore.setText("GAME OVER");
+				health = 10;
+			}
 		}
 }
