@@ -317,9 +317,9 @@ public class startScreen extends Application {
 		BackgroundImage Background = new BackgroundImage(new Image("images/spacey.jpg", 600, 600, false, true),
 				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 				BackgroundSize.DEFAULT);
-		BackgroundImage Background2 = new BackgroundImage(new Image("images/nar.gif", 600, 600, false, true),
+		/*BackgroundImage Background2 = new BackgroundImage(new Image("images/nar.gif", 600, 600, false, true),
 				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-				BackgroundSize.DEFAULT);
+				BackgroundSize.DEFAULT);*/
 		BackgroundImage Background3 = new BackgroundImage(new Image("images/highscore.gif", 600, 600, false, true),
 				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 				BackgroundSize.DEFAULT);
@@ -330,7 +330,6 @@ public class startScreen extends Application {
 		root2.setBackground(new Background(Background));
 		root3.setBackground(new Background(Background3));
 		Diff.setBackground(new Background(Background4));
-		gameRoot.setBackground(new Background(Background2));
 
 		// Game
 		cScore.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
