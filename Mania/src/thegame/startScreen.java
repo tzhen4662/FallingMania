@@ -184,8 +184,9 @@ public class startScreen extends Application {
 				"-fx-border-color: #0000ff; -fx-background-color: #87CEFA; -fx-font-size: 20px; -fx-text-fill: white;");
 
 		Button button4 = new Button();
-		button4.setText("The controls are D, F, Space, J, and K. \nThe objective of the game is to press "
-				+ "\nthe key at the right time when the circle \nis falling.");
+		button4.setText("The controls are D, F, J, and K. \nThe objective of the game is to press "
+				+ "\nthe key at the right time when the circle \nis falling. You gain more points if you hit\ncombos"
+				+ " and lose hp when you miss, the \ngame is only set to run 10 seconds");
 		button4.setStyle(
 				"-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 2em; -fx-text-fill: white;");
 
@@ -222,16 +223,21 @@ public class startScreen extends Application {
 		Button easy = new Button();
 		easy.setText("Easy");
 		easy.setStyle(
-				"-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+				"-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 20px; -fx-text-fill: white;");
 
 		Button normal = new Button();
 		normal.setText("Normal");
 		normal.setStyle(
-				"-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
+				"-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 20px; -fx-text-fill: white;");
 
 		Button hard = new Button();
 		hard.setText("Hard");
 		hard.setStyle(
+				"-fx-border-color: #0000ff; -fx-background-color: #00BFFF; -fx-font-size: 20px; -fx-text-fill: white;");
+		
+		Button backButton4 = new Button();
+		backButton4.setText("Back");
+		backButton4.setStyle(
 				"-fx-border-color: #99CCFF; -fx-background-color: #CCCCFF; -fx-font-size: 15px; -fx-text-fill: white;");
 
 		// Texts
@@ -255,7 +261,7 @@ public class startScreen extends Application {
 		gameRoot.getChildren().addAll(circle1, circle2, circle4, circle5);
 		gameRoot.getChildren().addAll(clickCircle1, clickCircle2, clickCircle4, clickCircle5);
 		gameRoot.getChildren().addAll(cScore, cHealth, cCombo);
-		Diff.getChildren().addAll(easy, normal, hard);
+		Diff.getChildren().addAll(easy, normal, hard, backButton4);
 
 		// Layout Stuff
 		title.setLayoutX(190);
@@ -282,18 +288,20 @@ public class startScreen extends Application {
 		backButton2.setLayoutY(0);
 		backButton3.setLayoutX(0);
 		backButton3.setLayoutY(0);
+		backButton4.setLayoutX(0);
+		backButton4.setLayoutY(0);
 		cScore.setLayoutX(windowX / 2);
 		cScore.setLayoutY(windowY / 2);
 		cHealth.setLayoutX(500);
 		cHealth.setLayoutY(100);
 		cCombo.setLayoutX(500);
 		cCombo.setLayoutY(150);
-		easy.setLayoutX(280);
+		easy.setLayoutX(260);
 		easy.setLayoutY(200);
-		normal.setLayoutX(280);
-		normal.setLayoutY(250);
-		hard.setLayoutX(280);
-		hard.setLayoutY(300);
+		normal.setLayoutX(260);
+		normal.setLayoutY(260);
+		hard.setLayoutX(260);
+		hard.setLayoutY(320);
 
 		// Scenes
 		Scene scene = new Scene(root, windowX, windowY);
@@ -309,16 +317,20 @@ public class startScreen extends Application {
 		BackgroundImage Background = new BackgroundImage(new Image("images/spacey.jpg", 600, 600, false, true),
 				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 				BackgroundSize.DEFAULT);
+		BackgroundImage Background2 = new BackgroundImage(new Image("images/nar.gif", 600, 600, false, true),
+				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+				BackgroundSize.DEFAULT);
+		BackgroundImage Background3 = new BackgroundImage(new Image("images/highscore.gif", 600, 600, false, true),
+				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+				BackgroundSize.DEFAULT);
+		BackgroundImage Background4 = new BackgroundImage(new Image("images/Mode.gif", 600, 600, false, true),
+				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+				BackgroundSize.DEFAULT);
 		root.setBackground(new Background(Background));
-		BackgroundImage controlBackground = new BackgroundImage(new Image("images/spacey.jpg", 600, 600, false, true),
-				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-				BackgroundSize.DEFAULT);
-		root2.setBackground(new Background(controlBackground));
-		BackgroundImage highscoreBackground = new BackgroundImage(new Image("images/spacey.jpg", 600, 600, false, true),
-				BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-				BackgroundSize.DEFAULT);
-		root3.setBackground(new Background(highscoreBackground));
-		Diff.setBackground(new Background(highscoreBackground));
+		root2.setBackground(new Background(Background));
+		root3.setBackground(new Background(Background3));
+		Diff.setBackground(new Background(Background4));
+		gameRoot.setBackground(new Background(Background2));
 
 		// Game
 		cScore.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -361,7 +373,7 @@ public class startScreen extends Application {
 			timeline2.setCycleCount(20);
 			timeline4.setCycleCount(20);
 			timeline5.setCycleCount(20);
-			resetGame(gameRoot, 1);
+			resetGame(gameRoot, 0.7);
 			playTimelines();
 			primaryStage.setScene(game);
 		});
@@ -373,6 +385,10 @@ public class startScreen extends Application {
 			primaryStage.setScene(scene);
 		});
 		backButton3.setOnAction(value -> {
+			primaryStage.setScene(scene);
+			stopGame();
+		});
+		backButton4.setOnAction(value -> {
 			primaryStage.setScene(scene);
 			stopGame();
 		});
