@@ -36,7 +36,7 @@ import javafx.util.Duration;
 public class startScreen extends Application
 {
 		
-	private double howFast = 1;
+	private double howFast = 1.5;
 	double r1 = Math.random() + howFast;
 	double r2 = Math.random() + howFast;
 	double r3 = Math.random() + howFast;
