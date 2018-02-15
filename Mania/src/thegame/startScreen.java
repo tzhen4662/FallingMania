@@ -149,13 +149,13 @@ public class startScreen extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		File CVS = new File("Mania/src/csv/ScoreSheet.csv");
+		/*File CVS = new File("Mania/src/csv/ScoreSheet.csv");
 		cSVUlities data = new cSVUlities(CVS);
 		ArrayList<String> Names = new ArrayList<String>();
 		ArrayList<String> Score = new ArrayList<String>();
 		Names = data.getColumnData(0);
 		Score = data.getColumnData(1);
-
+*/
 		Label title = new Label();
 		title.setText("Falling Mania");
 		title.setStyle(
