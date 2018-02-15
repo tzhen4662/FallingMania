@@ -1,4 +1,4 @@
- package thegame;
+package thegame;
 /**
  * 
  * @author Zi long Yuen
@@ -36,18 +36,19 @@ import javafx.util.Duration;
 public class startScreen extends Application
 {
 		
-	double r1 = Math.random() + 2;
-	double r2 = Math.random() + 2;
-	double r3 = Math.random() + 2;
-	double r4 = Math.random() + 2;
-	double r5 = Math.random() + 2;
+	private double howFast = 1;
+	double r1 = Math.random() + howFast;
+	double r2 = Math.random() + howFast;
+	double r3 = Math.random() + howFast;
+	double r4 = Math.random() + howFast;
+	double r5 = Math.random() + howFast;
 	
 	private int LENGTHOFGAME = 10;
 	private double RADIUS = 20.0;
 	private int health = 100;
 	private int score = 0;
 	private int combo = 0;
-	private int windowX = 600;
+	private int windowX = 600; 
 	private int windowY = 600;
 	private Circle circle1 = new Circle(100, -50, RADIUS);
 	private Circle circle2 = new Circle(200, -50, RADIUS);
@@ -65,10 +66,10 @@ public class startScreen extends Application
 	Timeline timeline4 = new Timeline();
 	Timeline timeline5 = new Timeline();
 	 
-	Text cScore = new Text("Score");
+	Text cScore = new Text("0");
 	Text cHealth = new Text("100%");
 	Text cCombo = new Text("0x");
-		
+	
 		public static void main(String[] args){
 			Application.launch(args);
 		}
@@ -153,6 +154,8 @@ public class startScreen extends Application
 			Text t4 = new Text (350, 200, "");
 			Text t5 = new Text (350, 250, "");
 			Text t6 = new Text (350, 300, "");
+			
+			//Panes
 			Pane root = new Pane();
 			Pane root2 = new Pane();
 			Pane root3 = new Pane();
@@ -162,7 +165,12 @@ public class startScreen extends Application
 			root2.getChildren().addAll(controlTitle, button4, backButton);
 		    root3.getChildren().addAll(backButton2, button5, button6,t1,t2,t3,t4,t5,t6);
 		    gameRoot.getChildren().addAll(backButton3);
-		    Diff.getChildren().addAll(easy, normal, hard);
+		    gameRoot.getChildren().addAll(circle1, circle2, circle3, circle4, circle5);
+		    gameRoot.getChildren().addAll(clickCircle1, clickCircle2, clickCircle3, clickCircle4, clickCircle5);
+			gameRoot.getChildren().addAll(cScore,cHealth,cCombo);
+	        Diff.getChildren().addAll(easy, normal, hard);
+		    
+		    //Layout Stuff
 		    title.setLayoutX(190);
 			title.setLayoutY(140);
 		    controlTitle.setLayoutX(220);
@@ -187,6 +195,12 @@ public class startScreen extends Application
 			backButton2.setLayoutY(0);
 			backButton3.setLayoutX(0);
 			backButton3.setLayoutY(0);
+			cScore.setLayoutX(windowX/2);
+			cScore.setLayoutY(windowY/2);
+			cHealth.setLayoutX(500);
+			cHealth.setLayoutY(100);
+			cCombo.setLayoutX(500);
+			cCombo.setLayoutY(150);
 			easy.setLayoutX(280);
 			easy.setLayoutY(200);
 			normal.setLayoutX(280);
@@ -230,93 +244,106 @@ public class startScreen extends Application
 			circle4.setRadius(RADIUS);
 			circle5.setRadius(RADIUS);
 			
-			//Timeline 
-			Timeline timeline = new Timeline();
-			timeline.setCycleCount(10);
-			KeyFrame kf1 = new KeyFrame(Duration.seconds(1.5),
+			//Timeline stuff
+			timeline1.setCycleCount(LENGTHOFGAME);
+			timeline2.setCycleCount(LENGTHOFGAME);
+			timeline3.setCycleCount(LENGTHOFGAME);
+			timeline4.setCycleCount(LENGTHOFGAME);
+			timeline5.setCycleCount(LENGTHOFGAME);
+			KeyFrame kf1 = new KeyFrame(Duration.seconds(r1),
 					new KeyValue(circle1.centerYProperty(), 650));
-			KeyFrame kf2 = new KeyFrame(Duration.seconds(1.5),
+			KeyFrame kf2 = new KeyFrame(Duration.seconds(r2),
 	                new KeyValue(circle2.centerYProperty(), 650));
-			KeyFrame kf3 = new KeyFrame(Duration.seconds(1.5),
+			KeyFrame kf3 = new KeyFrame(Duration.seconds(r3),
 					new KeyValue(circle3.centerYProperty(), 650));
-			KeyFrame kf4 = new KeyFrame(Duration.seconds(1.5),
+			KeyFrame kf4 = new KeyFrame(Duration.seconds(r4),
 	                new KeyValue(circle4.centerYProperty(), 650));
-			KeyFrame kf5 = new KeyFrame(Duration.seconds(1.5),
+			KeyFrame kf5 = new KeyFrame(Duration.seconds(r5),
 	                new KeyValue(circle5.centerYProperty(), 650));
-			 timeline1.getKeyFrames().add(kf1);
-		     timeline2.getKeyFrames().add(kf2);
-		     timeline3.getKeyFrames().add(kf3);
-		     timeline4.getKeyFrames().add(kf4);
-		     timeline5.getKeyFrames().add(kf5);
-
-			cScore.setLayoutX(300);
-			cScore.setLayoutY(300);
-			cHealth.setLayoutX(500);
-			cHealth.setLayoutY(100);
-			cCombo.setLayoutX(500);
-			cCombo.setLayoutY(150);
+			timeline1.getKeyFrames().add(kf1);
+	        timeline2.getKeyFrames().add(kf2);
+	        timeline3.getKeyFrames().add(kf3);
+	        timeline4.getKeyFrames().add(kf4);
+	        timeline5.getKeyFrames().add(kf5);
 			
-			gameRoot.getChildren().addAll(clickCircle1, clickCircle2, clickCircle3, clickCircle4, clickCircle5);
-			gameRoot.getChildren().addAll(cScore,cHealth,cCombo);
-	        gameRoot.getChildren().addAll(circle1, circle2, circle3, circle4, circle5);
-	        
 	        // make sure to end game when the health reaches 0
 	        // also change the keypressed to become an event listener. the onkeypressed is only working with 
 	        game.setOnKeyPressed(new EventHandler<KeyEvent>() {
 	            @Override
 	            public void handle(KeyEvent event) {      
 	        		if(event.getCode() == KeyCode.D) {
-	        			checkHealth();
+	        			checkHealth(gameRoot);
 	        			getPoints(circle1);
 	        			display();
 	        		}
 	        		if(event.getCode() == KeyCode.F) {
-	        			checkHealth();
+	        			checkHealth(gameRoot);
 	        			getPoints(circle2);
 	        			display();
 	        		}
 	        		if (event.getCode() == KeyCode.SPACE){
-	        			checkHealth();
+	        			checkHealth(gameRoot);
 	        			getPoints(circle3);
 	        			display();
 	        		}    
 	        		if(event.getCode() == KeyCode.J) {
-	        			checkHealth();
+	        			checkHealth(gameRoot);
 	        			getPoints(circle4);
 	        			display();
 	        		}
 	        		if(event.getCode() == KeyCode.K) {
-	        			checkHealth();
+	        			checkHealth(gameRoot);
 	        			getPoints(circle5);
 	        			display();
-	        		}	
-	        	}
+	        		}
+	            }
 	        });
 		    
 			//Button Actions
 			button.setOnAction(value ->  {
 	        	primaryStage.setScene(Mode);
-	        	timeline.play();
 			});
 			button2.setOnAction(value ->  {
-				primaryStage.setScene(highscore)
-			;});
+				primaryStage.setScene(highscore);
+			});
 			button3.setOnAction(value ->  {
-				primaryStage.setScene(control)
-			;});
+				primaryStage.setScene(control);
+			});
 			button4.setOnAction(value ->  {
 	        	System.out.println("Controls ");
 			});
+			easy.setOnAction(value ->  {
+		    	resetGame(gameRoot);
+				LENGTHOFGAME = 5;
+				howFast = 2;
+				playTimelines();
+				primaryStage.setScene(game);
+		    	});
+			normal.setOnAction(value ->  {
+				resetGame(gameRoot);
+				LENGTHOFGAME = 10;
+				howFast = 1.5;
+				playTimelines();
+				primaryStage.setScene(game);
+		    });
+			hard.setOnAction(value ->  {
+		    	resetGame(gameRoot);
+				LENGTHOFGAME = 30;
+				howFast = 1;
+				playTimelines();
+				primaryStage.setScene(game);
+			});
 		    endButton.setOnAction(e -> Platform.exit());
 			backButton.setOnAction(value ->  {
-				primaryStage.setScene(scene)
-			;});
+				primaryStage.setScene(scene);
+			});
 			backButton2.setOnAction(value ->  {
-				primaryStage.setScene(scene)
-			;});
+				primaryStage.setScene(scene);
+			});
 			backButton3.setOnAction(value ->  {
-				primaryStage.setScene(scene)
-			;});
+				primaryStage.setScene(scene);
+				stopGame();
+			});
 		}
 		
 		// remember to make it so that health can't go over 100
@@ -352,26 +379,56 @@ public class startScreen extends Application
 		}
 		
 		public void display() {
-			cScore.setText("" + score + "");   
+			if(health <= 0) {
+				cScore.setText("GAME OVER");   
+			}
+			else {
+				cScore.setText("" + score + "");
+			}
 	    	cHealth.setText("" + health + "%");
 	    	cCombo.setText("" + combo + "x");
 		}
 		
-		public void resetGame() {
+		public void resetGame(Pane game) {
 			health = 100;
 			score = 0;
 			combo = 0;	
+			timeline1.playFromStart();
+			timeline2.playFromStart();
+			timeline3.playFromStart();
+			timeline4.playFromStart();
+			timeline5.playFromStart();
+			circle1.setLayoutY(-50);
+			circle2.setLayoutY(-50);
+			circle3.setLayoutY(-50);
+			circle4.setLayoutY(-50);
+			circle5.setLayoutY(-50);
+		}
+
+		
+		public void playTimelines()
+		{
+			timeline1.play();
+	    	timeline2.play();
+	    	timeline3.play();
+	    	timeline4.play();
+	    	timeline5.play();
 		}
 		
-		public void checkHealth() {
+		public void checkHealth(Pane game) {
 			if(health <= 0) {
-				timeline1.stop();
-				timeline2.stop();
-				timeline3.stop();
-				timeline4.stop();
-				timeline5.stop();
-				cScore.setText("GAME OVER");
+				stopGame();
+				//game.getChildren().removeAll(circle1, circle2, circle3, circle4, circle5);
 				health = 10;
 			}
+		}
+		
+		public void stopGame()
+		{
+			timeline1.stop();
+			timeline2.stop();
+			timeline3.stop();
+			timeline4.stop();
+			timeline5.stop();
 		}
 }
